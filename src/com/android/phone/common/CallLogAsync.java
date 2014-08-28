@@ -102,6 +102,30 @@ public class CallLogAsync {
             this.durationInSec = (int)(durationInMillis / 1000);
             this.durationType = durationType;
             this.subscription = subscription;
+            this.videocallduration = null;
+        }
+
+        public AddCallArgs(Context context,
+                           CallerInfo ci,
+                           String number,
+                           int presentation,
+                           int callType,
+                           long timestamp,
+                           long durationInMillis,
+                           int subscription,
+                           int durationType,
+                           String videocallduration) {
+
+            this.context = context;
+            this.ci = ci;
+            this.number = number;
+            this.presentation = presentation;
+            this.callType = callType;
+            this.timestamp = timestamp;
+            this.durationInSec = (int)(durationInMillis / 1000);
+            this.durationType = durationType;
+            this.subscription = subscription;
+            this.videocallduration = videocallduration;
         }
         // Since the members are accessed directly, we don't use the
         // mXxxx notation.
@@ -114,6 +138,7 @@ public class CallLogAsync {
         public final int durationInSec;
         public final int durationType;
         public final int subscription;
+        public final String videocallduration;
     }
 
     /**
@@ -166,9 +191,16 @@ public class CallLogAsync {
 
                 try {
                     // May block.
-                    result[i] = Calls.addCall(c.ci, c.context, c.number, c.presentation,
+                    if (c.videocallduration!= null){
+                        Log.d(TAG, "add calllog with video call duration");
+		                result[i] = Calls.addCall(c.ci, c.context, c.number, c.presentation,
+	                        c.callType, c.timestamp, c.durationInSec, c.subscription,
+	                        c.durationType, c.videocallduration);
+                    } else {
+                        result[i] = Calls.addCall(c.ci, c.context, c.number, c.presentation,
                             c.callType, c.timestamp, c.durationInSec, c.subscription,
                             c.durationType);
+                    }
                 } catch (Exception e) {
                     // This must be very rare but may happen in legitimate cases.
                     // e.g. If the phone is encrypted and thus write request fails, it may
