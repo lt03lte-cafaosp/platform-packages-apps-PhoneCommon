@@ -65,6 +65,31 @@
     <!--  Do not translate. -->
     <string name="dialpad_pound_letters"></string>
 
+    <!--  Do not translate. -->
+    <string name="dialpad_0_labels"></string>
+    <!--  Do not translate. -->
+    <string name="dialpad_1_labels"></string>
+    <!--  Do not translate. -->
+    <string name="dialpad_2_labels"></string>
+    <!--  Do not translate. -->
+    <string name="dialpad_3_labels"></string>
+    <!--  Do not translate. -->
+    <string name="dialpad_4_labels"></string>
+    <!--  Do not translate. -->
+    <string name="dialpad_5_labels"></string>
+    <!--  Do not translate. -->
+    <string name="dialpad_6_labels"></string>
+    <!--  Do not translate. -->
+    <string name="dialpad_7_labels"></string>
+    <!--  Do not translate. -->
+    <string name="dialpad_8_labels"></string>
+    <!--  Do not translate. -->
+    <string name="dialpad_9_labels"></string>
+    <!--  Do not translate. -->
+    <string name="dialpad_star_labels"></string>
+    <!--  Do not translate. -->
+    <string name="dialpad_pound_labels"></string>
+
     <!-- String describing the overflow menu button in the dialpad. -->
     <string name="description_dialpad_overflow">More options</string>
 
