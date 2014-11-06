@@ -26,7 +26,9 @@
             android:layout_width="@dimen/dialpad_key_number_width"
             android:layout_marginRight="@dimen/dialpad_key_margin_right"
             style="@style/DialpadKeyStarStyle" />
-        <View
+
+        <TextView
+            android:id="@+id/dialpad_key_letters"
             android:layout_width="@dimen/dialpad_key_text_width"
             style="@style/DialpadKeyLettersStyle" />
     </LinearLayout>
