@@ -154,7 +154,13 @@ public class DialpadView extends LinearLayout {
             }
 
             if (labelsView != null) {
-                labelsView.setText(resources.getString(labelIds[i]));
+                String label = resources.getString(labelIds[i]);
+                if (!TextUtils.isEmpty(label)) {
+                    labelsView.setVisibility(View.VISIBLE);
+                    labelsView.setText(label);
+                } else {
+                    labelsView.setVisibility(View.GONE);
+                }
             }
         }
 
