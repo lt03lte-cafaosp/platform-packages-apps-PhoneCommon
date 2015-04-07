@@ -181,6 +181,8 @@
     <string name="callFailed_number_changed"></string>
     <!-- Text for CallFailCause.PREEMPTION = 25 -->
     <string name="callFailed_preemption"></string>
+    <!-- Text for CallFailCause.NON_SELECTED_USER_CLEARING = 26 -->
+    <string name="callFailed_non_selected_user_clearing"></string>
     <!-- Text for CallFailCause.CALL_FAIL_DESTINATION_OUT_OF_ORDER = 27 -->
     <string name="callFailed_destination_out_of_order"></string>
     <!-- Text for CallFailCause.INVALID_NUMBER = 28 -->
