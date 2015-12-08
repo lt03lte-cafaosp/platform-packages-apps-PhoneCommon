@@ -57,4 +57,16 @@
     <string name="dialpad_pound_labels"></string>
     <!-- Text for CallFailCause.NON_SELECTED_USER_CLEARING = 26 -->
     <string name="callFailed_non_selected_user_clearing"></string>
+
+    <string name="firewall_number_len_not_valid">Number is wrong</string>
+
+    <string name="firewall_number_in_white">"Number already in whitelist"</string>
+
+    <string name="firewall_number_in_black">"Number already in blacklist"</string>
+
+    <string name="firewall_add_blacklist_warning">if you add this number to blacklsit, you will not receive the messages and calls from it</string>
+
+    <string name="firewall_save_success">Saved successfully</string>
+
+    <string name="firewall_reach_maximun">The list is full and can not be filled in!</string>
 </resources>
