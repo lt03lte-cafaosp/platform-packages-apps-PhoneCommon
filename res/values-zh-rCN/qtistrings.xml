@@ -32,8 +32,6 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="firewall_number_len_not_valid">号码错误</string>
-    <string name="firewall_number_in_white">"该号码已在白名单中"</string>
-    <string name="firewall_number_in_black">"该号码已在黑名单中"</string>
     <string name="firewall_add_blacklist_warning">如果将该号码加入黑名单，你将不会再收到该号码的消息和来电</string>
     <string name="firewall_save_success">保存成功</string>
     <string name="firewall_reach_maximun">"列表已满!"</string>

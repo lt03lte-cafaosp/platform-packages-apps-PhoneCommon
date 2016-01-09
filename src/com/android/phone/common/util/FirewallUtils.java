@@ -42,6 +42,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.widget.Toast;
 import android.util.Log;
@@ -122,21 +123,7 @@ public class FirewallUtils {
                     Toast.LENGTH_SHORT).show();
             return false;
         }
-        number = formatFirewallNumber(number);
-        Uri reverseFirewallUri = isBlacklist? WHITELIST_CONTENT_URI : BLACKLIST_CONTENT_URI;
-        if (isNumberInFirewall(context, reverseFirewallUri, number)) {
-            String message = isBlacklist? context.getString(
-                    R.string.firewall_number_in_white)
-                    : context.getString(R.string.firewall_number_in_black);
-            Toast.makeText(context, message,
-                    Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        ContentValues values = new ContentValues();
-        values.put("number", number);
-        Uri firewallUri = isBlacklist? BLACKLIST_CONTENT_URI: WHITELIST_CONTENT_URI;
-        Uri mUri = context.getContentResolver().insert(firewallUri, values);
-        return true;
+        return addToFirewall(context, isBlacklist, number, null, 0);
     }
 
     public static boolean isNumberInFirewall(Context context, boolean isBlacklist, String number) {
@@ -155,17 +142,15 @@ public class FirewallUtils {
             return null;
         }
         number = number.replaceAll("[\\-\\/ ]", "");
-        int len = number.length();
-        if (len > COMPARE_NUMBER_LEN) {
-            // we just compare the last 11 number, since we just saved 11 numbers in DB.
-            number = number.substring(len - COMPARE_NUMBER_LEN, len);
-        }
         return number;
     }
 
     public static  boolean isNumberInFirewall(Context context, Uri firewallUri, String number) {
         if (context != null) {
-            number = formatFirewallNumber(number);
+            String minMatchNumber = PhoneNumberUtils.toCallerIDMinMatch(number);
+            String minNumber= new StringBuffer(minMatchNumber).reverse().toString();
+            number = formatFirewallNumber(minNumber);
+            Log.d(TAG, "minNumber = " + minNumber + " number = " + number);
             Cursor firewallCursor = null;
             try {
                 firewallCursor = context.getContentResolver().query(firewallUri,
@@ -213,7 +198,9 @@ public class FirewallUtils {
             return false;
         }
         ContentValues values = new ContentValues();
-        values.put(NAME_KEY, name);
+        if (!TextUtils.isEmpty(name)) {
+            values.put(NAME_KEY, name);
+        }
         values.put(NUMBER_KEY, number);
         values.put(PERSON_KEY, personId);
         boolean result = context.getContentResolver().insert(firewallUri, values) != null;
@@ -285,11 +272,11 @@ public class FirewallUtils {
 
     public static Intent createIntentForBlacklist(String number, String name) {
         Intent intent = new Intent();
-        Bundle whiteBundle = new Bundle();
-        whiteBundle.putString(NUMBER_KEY, number);
-        whiteBundle.putInt(PERSON_KEY, 0);// optional
-        whiteBundle.putString(MODE_KEY, BLACKLIST);
-        whiteBundle.putString(NAME_KEY, name);
+        Bundle blackBundle = new Bundle();
+        blackBundle.putString(NUMBER_KEY, number);
+        blackBundle.putInt(PERSON_KEY, 0);// optional
+        blackBundle.putString(MODE_KEY, BLACKLIST);
+        blackBundle.putString(NAME_KEY, name);
         return intent;
     }
 }
