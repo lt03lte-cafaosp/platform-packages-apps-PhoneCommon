@@ -180,7 +180,7 @@ public class FirewallUtils {
         String deleteSelectionArgs [] = new String[] {
                 String.valueOf(number)};
         boolean result = context.getContentResolver().delete(firewallUri, deleteSelection,
-                deleteSelectionArgs) >= 0;
+                deleteSelectionArgs) > 0;
         if (result) {
             return true;
         }
